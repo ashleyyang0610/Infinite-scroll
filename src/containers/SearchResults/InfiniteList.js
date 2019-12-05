@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FixedSizeList as List } from 'react-window';
 import _debounce from 'lodash/debounce';
@@ -62,6 +63,14 @@ const InfiniteList = ({ height, itemSize, repoList, totalCount, width }) => {
             {ListItem}
         </List>
     );
+};
+
+InfiniteList.propTypes = {
+    height: PropTypes.number.isRequired,
+    itemSize: PropTypes.number.isRequired,
+    repoList: PropTypes.array.isRequired,
+    totalCount: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired
 };
 
 export default InfiniteList;

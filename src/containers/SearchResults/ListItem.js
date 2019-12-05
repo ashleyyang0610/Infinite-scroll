@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _isEmpty from 'lodash/isEmpty';
 import { H3 } from 'components/typography';
 import { Hr, SearchItem, Anchor, Paragraph } from './SearchResultStyledComps';
@@ -23,6 +24,12 @@ const ListItem = ({ data, index, style }) => {
             </Paragraph>
         </SearchItem>
     );
+};
+
+ListItem.propTypes = {
+    data: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    style: PropTypes.object.isRequired
 };
 
 export default ListItem;
