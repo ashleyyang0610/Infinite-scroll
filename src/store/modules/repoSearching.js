@@ -1,9 +1,11 @@
+import 'rxjs/add/operator/exhaustMap';
 import 'rxjs/add/operator/switchMap';
 import _get from 'utils/httpService';
+import store from 'store/configureStore';
 import { catchError, switchMap } from 'rxjs/operators';
 import { concat, from, of } from 'rxjs';
 import { createAction } from 'redux-actions';
-import { PAGE_SIZE, GET_REPO_LSIT } from 'config/repoSearching';
+import { DEFAULT_PAGE_SIZE, GET_REPO_LSIT } from 'config/repoSearching';
 
 /*
  * action types
@@ -11,18 +13,22 @@ import { PAGE_SIZE, GET_REPO_LSIT } from 'config/repoSearching';
 export const FETCH_REPO_DATA = 'FETCH_REPO_DATA';
 export const GET_REPO_DATA = 'GET_REPO_DATA';
 export const RESET_REPO_SEARCHING_DEFAULT = 'RESET_REPO_SEARCHING_DEFAULT';
-export const UPDATE_ALL_DATA_LOADED_FLAG = 'UPDATE_ALL_DATA_LOADED_FLAG';
+export const SEARCH_REPO_DATA = 'SEARCH_REPO_DATA';
+export const UPDATE_KEYWORD = 'UPDATE_KEYWORD';
 export const UPDATE_LOADING_FLAG = 'UPDATE_LOADING_FLAG';
+export const UPDATE_PAGE_SIZE = 'UPDATE_PAGE_SIZE';
 export const UPDATE_REPO_LIST = 'UPDATE_REPO_LIST';
+export const UPDATE_TOTAL_COUNT = 'UPDATE_TOTAL_COUNT';
 
 /*
  * initial state
  */
 export const repoSearchingState = {
-    allDataLoaded: false,
     isLoading: false,
+    keyword: '',
+    pageSize: DEFAULT_PAGE_SIZE,
     repoList: [],
-    offset: 0
+    totalCount: 0
 };
 
 /*
@@ -33,16 +39,18 @@ export default function repoSearching(state = repoSearchingState, action) {
         case RESET_REPO_SEARCHING_DEFAULT: {
             const newState = {
                 ...state,
-                allDataLoaded: false,
                 isLoading: false,
-                repoList: []
+                keyword: '',
+                pageSize: DEFAULT_PAGE_SIZE,
+                repoList: [],
+                totalCount: 0
             };
             return newState;
         }
-        case UPDATE_ALL_DATA_LOADED_FLAG: {
+        case UPDATE_KEYWORD: {
             const newState = {
                 ...state,
-                allDataLoaded: action.payload
+                keyword: action.payload
             };
             return newState;
         }
@@ -53,10 +61,24 @@ export default function repoSearching(state = repoSearchingState, action) {
             };
             return newState;
         }
+        case UPDATE_PAGE_SIZE: {
+            const newState = {
+                ...state,
+                pageSize: action.payload
+            };
+            return newState;
+        }
         case UPDATE_REPO_LIST: {
             const newState = {
                 ...state,
                 repoList: action.payload
+            };
+            return newState;
+        }
+        case UPDATE_TOTAL_COUNT: {
+            const newState = {
+                ...state,
+                totalCount: action.payload
             };
             return newState;
         }
@@ -74,23 +96,65 @@ export const getRepoData = createAction(GET_REPO_DATA);
 export const resetRepoSearchingDefault = createAction(
     RESET_REPO_SEARCHING_DEFAULT
 );
-export const updateAllDataLoadedFlag = createAction(
-    UPDATE_ALL_DATA_LOADED_FLAG
-);
+export const searchRepoData = createAction(SEARCH_REPO_DATA);
+export const updateKeyword = createAction(UPDATE_KEYWORD);
 export const updateLoadingFlag = createAction(UPDATE_LOADING_FLAG);
+export const updatePageSize = createAction(UPDATE_PAGE_SIZE);
 export const updateRepoList = createAction(UPDATE_REPO_LIST);
+export const updateTotalCount = createAction(UPDATE_TOTAL_COUNT);
 
 export const getRepoDataEpic = action$ =>
-    action$.ofType(GET_REPO_DATA).switchMap(action =>
+    action$.ofType(GET_REPO_DATA).exhaustMap(action =>
         concat(
             of({ type: UPDATE_LOADING_FLAG, payload: true }),
             from(
-                _get(GET_REPO_LSIT, { q: 'react', page: 1, per_page: 20 })
+                _get(GET_REPO_LSIT, {
+                    q: store.getState().repoSearching.keyword,
+                    page:
+                        action.payload.page ||
+                        store.getState().repoSearching.repoList.length /
+                            store.getState().repoSearching.pageSize +
+                            1,
+                    per_page:
+                        action.payload.per_page ||
+                        store.getState().repoSearching.pageSize
+                })
             ).pipe(
-                switchMap(response => updateRepoList(response)),
+                switchMap(response =>
+                    concat(
+                        of({
+                            type: UPDATE_REPO_LIST,
+                            payload: store
+                                .getState()
+                                .repoSearching.repoList.concat(
+                                    response.data.items
+                                )
+                        }),
+                        of({
+                            type: UPDATE_TOTAL_COUNT,
+                            payload: response.data.total_count
+                        }),
+                        of({ type: UPDATE_LOADING_FLAG, payload: false })
+                    )
+                ),
                 catchError(error =>
                     of({ type: UPDATE_LOADING_FLAG, payload: false })
                 )
             )
+        )
+    );
+
+export const searchRepoDataEpic = action$ =>
+    action$.ofType(SEARCH_REPO_DATA).switchMap(action =>
+        concat(
+            of({ type: UPDATE_LOADING_FLAG, payload: true }),
+            of({ type: UPDATE_KEYWORD, payload: action.payload.keyword }),
+            of({ type: UPDATE_REPO_LIST, payload: [] }),
+            of({
+                type: GET_REPO_DATA,
+                payload: {
+                    page: 1
+                }
+            })
         )
     );

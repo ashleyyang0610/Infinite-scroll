@@ -112,3 +112,26 @@
         content: '\00a0';
     }
 }
+
+.flex {
+    display: flex !important;
+}
+
+.flex-items-center {
+    align-items: center !important;
+}
+
+.flex-justify-between {
+    justify-content: space-between !important;
+}
+
+.position-middle-container {
+    position: relative;
+}
+
+.position-middle-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

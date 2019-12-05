@@ -1,8 +1,11 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
-import repoSearching, { getRepoDataEpic } from './repoSearching';
+import repoSearching, {
+    getRepoDataEpic,
+    searchRepoDataEpic
+} from './repoSearching';
 
-export const rootEpic = combineEpics(getRepoDataEpic);
+export const rootEpic = combineEpics(getRepoDataEpic, searchRepoDataEpic);
 
 const appReducer = combineReducers({
     repoSearching
