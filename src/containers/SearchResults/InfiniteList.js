@@ -6,20 +6,6 @@ import { ITEM_SIZE } from 'config/repoSearching';
 import { GET_REPO_DATA } from 'store/modules/repoSearching';
 import ListItem from './ListItem';
 
-const onItemsRendered = ({
-    overscanStartIndex,
-    overscanStopIndex,
-    visibleStartIndex,
-    visibleStopIndex
-}) => {
-    console.log(
-        overscanStartIndex,
-        overscanStopIndex,
-        visibleStartIndex,
-        visibleStopIndex
-    );
-};
-
 const onScroll = ({
     allDataLoaded,
     onFetchNextPage,
@@ -59,7 +45,6 @@ const InfiniteList = ({ height, itemSize, repoList, totalCount, width }) => {
                 repoList
             }}
             itemSize={ITEM_SIZE}
-            onItemsRendered={onItemsRendered}
             onScroll={_debounce(
                 ({ ...props }) =>
                     onScroll({
