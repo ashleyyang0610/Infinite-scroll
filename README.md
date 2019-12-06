@@ -46,6 +46,7 @@ The functions of the app has been tested exactly in below browsers:
 
 ### The Designs
 
+
 ### 3rd Party Libs
 
 -   [React v16.12.0](https://reactjs.org/)
@@ -74,3 +75,9 @@ The functions of the app has been tested exactly in below browsers:
 -   The Github search API is only able to fetch first 1000 data
 -   The API calls still reaches rate limit in "very" abnormal scrolling situation
 -   The total amount of serach result shows "0" before API response
+
+### References
+
+-   https://developer.github.com/v3/search/#search-repositories
+-   https://developer.github.com/v3/search/#rate-limit
+-   https://developer.github.com/v3/#pagination
