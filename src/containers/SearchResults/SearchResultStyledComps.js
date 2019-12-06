@@ -6,6 +6,14 @@ export const SearchResultsWrapper = styled.section`
 
 export const SearchItem = styled.div`
     padding: 0 15vw 24px 15vw;
+
+    @media screen and (min-width: 1020px) and (max-width: 1200px) {
+        padding: 5px 10vw;
+    }
+
+    @media screen and (max-width: 1019px) {
+        padding: 5px 5vw;
+    }
 `;
 
 export const Hr = styled.hr`
