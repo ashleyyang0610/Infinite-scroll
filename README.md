@@ -45,7 +45,36 @@ The functions of the app has been tested exactly in below browsers:
 -   [x] Mobile Chrome
 
 ### The Designs
+#### 1. Use "windowing" handle large datasets display
+The windowing means we only demonstrate the elements which can see by the user then once user scrolling we dynamic change it with the next correspond elements.
 
+![](https://github.com/ashleyyang0610/Infinite-scroll/blob/master/assets/react-window.gif)
+
+[How does windowing work?](https://bvaughn.github.io/forward-js-2017/#/12/1) by Brian Vaughn
+
+pros: Reduce DOM elements. Only create elements the user can see.
+
+cons: Unable to search the item which isn't rendered. 
+
+#### 2. Make the scroll "really" infinite (The flow of infinite scroll is self-designed)
+<img src="https://github.com/ashleyyang0610/Infinite-scroll/blob/master/assets/infinite_scroll_flow.png" width="400">
+
+#### 3. Handle momentum-based scrolling
+The `page_size` which used in API is calculated by browser view height. 
+```
+useEffect(() => {
+    const wrapperHeight = document.querySelector('.infinite-list').offsetHeight;
+
+    dispatch({
+        type: UPDATE_PAGE_SIZE,
+        payload: Math.ceil(wrapperHeight / ITEM_SIZE) * 15
+    });
+}, [dispatch]);
+```
+
+`Math.ceil(wrapperHeight / ITEM_SIZE)`: The amount of visible items.
+
+API `page_size`is visible amount times 15.
 
 ### 3rd Party Libs
 
@@ -61,6 +90,7 @@ The functions of the app has been tested exactly in below browsers:
 
 ### What's Next?
 
+-   Normalize responsed data first before update to the store.
 -   Better handling of Github API maximum length 1000
 -   Error handling (notifications or toasts info)
 -   Better user experience/layout for mobile
@@ -81,3 +111,4 @@ The functions of the app has been tested exactly in below browsers:
 -   https://developer.github.com/v3/search/#search-repositories
 -   https://developer.github.com/v3/search/#rate-limit
 -   https://developer.github.com/v3/#pagination
+-   https://bvaughn.github.io/forward-js-2017/#/12/1
