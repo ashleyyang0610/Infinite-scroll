@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2d2da9fb1c05a99cb8878dd9f58bf0e6",
+    "revision": "1411ba97e204d3eadcb5619e69e64e47",
     "url": "/Infinite-scroll/index.html"
   },
   {
-    "revision": "1ce35d028c24a9ccdf15",
+    "revision": "7cd016e65e0072e37100",
     "url": "/Infinite-scroll/static/css/main.7d816d72.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Infinite-scroll/static/js/2.bf37d767.chunk.js"
   },
   {
-    "revision": "1ce35d028c24a9ccdf15",
-    "url": "/Infinite-scroll/static/js/main.94a74d71.chunk.js"
+    "revision": "7cd016e65e0072e37100",
+    "url": "/Infinite-scroll/static/js/main.9fc2c7ab.chunk.js"
   },
   {
     "revision": "d0e18570647a9dea39ef",
