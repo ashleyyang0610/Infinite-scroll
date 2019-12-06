@@ -25,6 +25,7 @@ export const Hr = styled.hr`
 `;
 
 export const Anchor = styled.a`
+    max-width: 100%;
     color: #0366d6;
     text-decoration: none;
 
@@ -34,6 +35,7 @@ export const Anchor = styled.a`
 `;
 
 export const Paragraph = styled.p`
+    width: 100%;
     color: #586069;
     margin: 0px;
 `;
