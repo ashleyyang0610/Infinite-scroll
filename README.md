@@ -1,68 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Infinite Scroll
 
-## Available Scripts
+An infinite list with Github search API.
 
-In the project directory, you can run:
+### Get Start
 
-### `yarn start`
+#### Clone Git repository
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+git clone https://github.com/ashleyyang0610/Infinite-scroll.git
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Development mode
 
-### `yarn test`
+Install dependencies and run the app in the development mode:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+yarn install
+yarn start
+```
 
-### `yarn build`
+or
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install
+npm start
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Production mode
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To build the app for production. The bundled files will be generated to the `build` folder:
 
-### `yarn eject`
+```
+yarn build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Supported Browsers
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The functions of the app has been tested exactly in below browsers:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-   [x] Chrome
+-   [x] Safari
+-   [x] Firefox
+-   [x] iOS Safari
+-   [x] Mobile Chrome
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### The Designs
 
-## Learn More
+### 3rd Party Libs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   [React v16.12.0](https://reactjs.org/)
+-   [Redux v4.0.4](https://redux.js.org/)
+-   [react-redux](https://react-redux.js.org/)
+-   [redux-observable](https://redux-observable.js.org/)
+-   [react-window](https://github.com/bvaughn/react-window)
+-   [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
+-   [styled-components](https://www.styled-components.com/)
+-   [react-debounce-input](https://www.npmjs.com/package/react-debounce-input)
+-   [Font Awesome](https://fontawesome.com/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### What's Next?
 
-### Code Splitting
+-   Better handling of Github API maximum length 1000
+-   Error handling (notifications or toasts info)
+-   Better user experience/layout for mobile
+-   Better handling when user scroll too fast but the API hasn't responsed
+-   Handling list container resizing.
+    -   Re-calculate page size when container height changed.
+    -   Update list container height when window resize on mobile Chrome.
+-   Unit test, storybook, etc.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Known Issues
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+-   The Github search API is only able to fetch first 1000 data
+-   The API calls still reaches rate limit in "very" abnormal scrolling situation
+-   The total amount of serach result shows "0" before API response
