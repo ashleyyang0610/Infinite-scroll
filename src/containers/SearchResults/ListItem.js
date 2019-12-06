@@ -14,7 +14,10 @@ const ListItem = ({ data, index, style }) => {
         <SearchItem key={rowData.id} style={style}>
             <Hr index={index} />
             <H3>
-                <Anchor href={rowData.html_url}>
+                <Anchor
+                    href={rowData.html_url}
+                    className="text-overflow-ellipsis"
+                >
                     {`${rowData.owner.login}/`}
                     <em>{rowData.name}</em>
                 </Anchor>

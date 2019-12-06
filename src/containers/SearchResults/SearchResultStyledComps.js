@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SearchResultsWrapper = styled.section`
-    height: calc(100vh - 52px);
+    flex: 1;
 `;
 
 export const SearchItem = styled.div`
@@ -34,7 +34,6 @@ export const Anchor = styled.a`
 `;
 
 export const Paragraph = styled.p`
-    width: 100%;
     color: #586069;
     margin: 0px;
 `;
