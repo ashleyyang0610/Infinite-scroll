@@ -12,6 +12,7 @@ import {
 } from './HeaderStyledComps';
 
 const Header = () => {
+    const keyword = useSelector(state => state.repoSearching.keyword);
     const totalCount = useSelector(state => state.repoSearching.totalCount);
     const dispatch = useDispatch();
     const onSearchInputChange = keyword => {
@@ -39,7 +40,7 @@ const Header = () => {
                     onChange={e => onSearchInputChange(e.target.value)}
                 />
             </div>
-            {totalCount !== 0 && (
+            {keyword !== '' && (
                 <TotalCount>
                     {`${parseNumberwithCommas(totalCount)} repository results`}
                 </TotalCount>

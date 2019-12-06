@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FixedSizeList as List } from 'react-window';
 import _debounce from 'lodash/debounce';
 import { ITEM_SIZE } from 'config/repoSearching';
-import { GET_REPO_DATA } from 'store/modules/repoSearching';
+import {
+    GET_REPO_DATA,
+    UPDATE_FETCHING_MASK
+} from 'store/modules/repoSearching';
 import ListItem from './ListItem';
 
 const onScroll = ({
@@ -14,13 +17,18 @@ const onScroll = ({
     repoLength,
     scrollDirection,
     scrollOffset,
-    scrollUpdateWasRequested
+    scrollUpdateWasRequested,
+    updateFetchingMask
 }) => {
     if (scrollDirection === 'backward' || allDataLoaded) {
         return;
     }
 
     const offsetIndex = Math.ceil(scrollOffset / ITEM_SIZE);
+
+    if (offsetIndex > repoLength - (pageSize / 15) * 3) {
+        updateFetchingMask(true);
+    }
 
     if (repoLength - offsetIndex < pageSize) {
         onFetchNextPage();
@@ -35,6 +43,12 @@ const InfiniteList = ({ height, itemSize, repoList, totalCount, width }) => {
         dispatch({
             type: GET_REPO_DATA,
             payload: { keyword: keyword }
+        });
+    };
+    const updateFetchingMask = state => {
+        dispatch({
+            type: UPDATE_FETCHING_MASK,
+            payload: state
         });
     };
     const allDataLoaded = repoList.length === totalCount;
@@ -52,6 +66,7 @@ const InfiniteList = ({ height, itemSize, repoList, totalCount, width }) => {
                         ...props,
                         allDataLoaded,
                         onFetchNextPage,
+                        updateFetchingMask,
                         pageSize: pageSize,
                         repoLength: repoList.length
                     }),

@@ -14,6 +14,7 @@ export const FETCH_REPO_DATA = 'FETCH_REPO_DATA';
 export const GET_REPO_DATA = 'GET_REPO_DATA';
 export const RESET_REPO_SEARCHING_DEFAULT = 'RESET_REPO_SEARCHING_DEFAULT';
 export const SEARCH_REPO_DATA = 'SEARCH_REPO_DATA';
+export const UPDATE_FETCHING_MASK = 'UPDATE_FETCHING_MASK';
 export const UPDATE_KEYWORD = 'UPDATE_KEYWORD';
 export const UPDATE_LOADING_FLAG = 'UPDATE_LOADING_FLAG';
 export const UPDATE_PAGE_SIZE = 'UPDATE_PAGE_SIZE';
@@ -24,6 +25,7 @@ export const UPDATE_TOTAL_COUNT = 'UPDATE_TOTAL_COUNT';
  * initial state
  */
 export const repoSearchingState = {
+    isFetchingMaskVisible: false,
     isLoading: false,
     keyword: '',
     pageSize: DEFAULT_PAGE_SIZE,
@@ -39,11 +41,19 @@ export default function repoSearching(state = repoSearchingState, action) {
         case RESET_REPO_SEARCHING_DEFAULT: {
             const newState = {
                 ...state,
+                isFetchingMaskVisible: false,
                 isLoading: false,
                 keyword: '',
                 pageSize: DEFAULT_PAGE_SIZE,
                 repoList: [],
                 totalCount: 0
+            };
+            return newState;
+        }
+        case UPDATE_FETCHING_MASK: {
+            const newState = {
+                ...state,
+                isFetchingMaskVisible: action.payload
             };
             return newState;
         }
@@ -97,6 +107,7 @@ export const resetRepoSearchingDefault = createAction(
     RESET_REPO_SEARCHING_DEFAULT
 );
 export const searchRepoData = createAction(SEARCH_REPO_DATA);
+export const updateFetchingMask = createAction(UPDATE_FETCHING_MASK);
 export const updateKeyword = createAction(UPDATE_KEYWORD);
 export const updateLoadingFlag = createAction(UPDATE_LOADING_FLAG);
 export const updatePageSize = createAction(UPDATE_PAGE_SIZE);
@@ -134,6 +145,7 @@ export const getRepoDataEpic = action$ =>
                             type: UPDATE_TOTAL_COUNT,
                             payload: response.data.total_count
                         }),
+                        of({ type: UPDATE_FETCHING_MASK, payload: false }),
                         of({ type: UPDATE_LOADING_FLAG, payload: false })
                     )
                 ),
@@ -148,6 +160,7 @@ export const searchRepoDataEpic = action$ =>
     action$.ofType(SEARCH_REPO_DATA).switchMap(action =>
         concat(
             of({ type: UPDATE_LOADING_FLAG, payload: true }),
+            of({ type: UPDATE_TOTAL_COUNT, payload: 0 }),
             of({ type: UPDATE_KEYWORD, payload: action.payload.keyword }),
             of({ type: UPDATE_REPO_LIST, payload: [] }),
             of({

@@ -30,3 +30,17 @@ export const Paragraph = styled.p`
     color: #586069;
     margin: 0px;
 `;
+
+export const FetchingMask = styled.div`
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #24292e;
+    font-size: 24px;
+`;

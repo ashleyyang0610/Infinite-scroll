@@ -6,9 +6,12 @@ import Loader from 'components/Loader';
 import { ITEM_SIZE } from 'config/repoSearching';
 import { UPDATE_PAGE_SIZE } from 'store/modules/repoSearching';
 import InfiniteList from './InfiniteList';
-import { SearchResultsWrapper } from './SearchResultStyledComps';
+import { FetchingMask, SearchResultsWrapper } from './SearchResultStyledComps';
 
 const SearchResults = () => {
+    const isFetchingMaskVisible = useSelector(
+        state => state.repoSearching.isFetchingMaskVisible
+    );
     const isLoading = useSelector(state => state.repoSearching.isLoading);
     const repoList = useSelector(state => state.repoSearching.repoList);
     const totalCount = useSelector(state => state.repoSearching.totalCount);
@@ -58,6 +61,11 @@ const SearchResults = () => {
                         );
                     }}
                 </AutoSizer>
+            )}
+            {isValidContent && isFetchingMaskVisible && (
+                <FetchingMask>
+                    Scroll too fast... The API is still fetching...{' '}
+                </FetchingMask>
             )}
         </SearchResultsWrapper>
     );
