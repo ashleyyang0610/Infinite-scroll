@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/Infinite-scroll/static/css/main.7d816d72.chunk.css",
-    "main.js": "/Infinite-scroll/static/js/main.9fc2c7ab.chunk.js",
-    "main.js.map": "/Infinite-scroll/static/js/main.9fc2c7ab.chunk.js.map",
+    "main.js": "/Infinite-scroll/static/js/main.8f9e1958.chunk.js",
+    "main.js.map": "/Infinite-scroll/static/js/main.8f9e1958.chunk.js.map",
     "runtime-main.js": "/Infinite-scroll/static/js/runtime-main.f85f543b.js",
     "runtime-main.js.map": "/Infinite-scroll/static/js/runtime-main.f85f543b.js.map",
-    "static/js/2.bf37d767.chunk.js": "/Infinite-scroll/static/js/2.bf37d767.chunk.js",
-    "static/js/2.bf37d767.chunk.js.map": "/Infinite-scroll/static/js/2.bf37d767.chunk.js.map",
+    "static/js/2.3e866669.chunk.js": "/Infinite-scroll/static/js/2.3e866669.chunk.js",
+    "static/js/2.3e866669.chunk.js.map": "/Infinite-scroll/static/js/2.3e866669.chunk.js.map",
     "index.html": "/Infinite-scroll/index.html",
-    "precache-manifest.645997f0c7b954b1b5bf6a9badd791d5.js": "/Infinite-scroll/precache-manifest.645997f0c7b954b1b5bf6a9badd791d5.js",
+    "precache-manifest.aed6011ea32fbf24f3b0af07bbcb28e6.js": "/Infinite-scroll/precache-manifest.aed6011ea32fbf24f3b0af07bbcb28e6.js",
     "service-worker.js": "/Infinite-scroll/service-worker.js",
     "static/css/main.7d816d72.chunk.css.map": "/Infinite-scroll/static/css/main.7d816d72.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.f85f543b.js",
-    "static/js/2.bf37d767.chunk.js",
+    "static/js/2.3e866669.chunk.js",
     "static/css/main.7d816d72.chunk.css",
-    "static/js/main.9fc2c7ab.chunk.js"
+    "static/js/main.8f9e1958.chunk.js"
   ]
 }
