@@ -13,6 +13,7 @@ const SearchResults = () => {
         state => state.repoSearching.isFetchingMaskVisible
     );
     const isLoading = useSelector(state => state.repoSearching.isLoading);
+    const keyword = useSelector(state => state.repoSearching.keyword);
     const repoList = useSelector(state => state.repoSearching.repoList);
     const totalCount = useSelector(state => state.repoSearching.totalCount);
     const dispatch = useDispatch();
@@ -38,8 +39,13 @@ const SearchResults = () => {
             {isLoading && !isValidContent && (
                 <Loader className="position-middle-content" />
             )}
-            {!isLoading && !isValidContent && (
+            {!isLoading && keyword !== '' && !isValidContent && (
                 <div className="position-middle-content">No repo found</div>
+            )}
+            {!isLoading && keyword === '' && !isValidContent && (
+                <div className="position-middle-content">
+                    Input keyword to search repository
+                </div>
             )}
             {isValidContent && (
                 <AutoSizer>
@@ -64,7 +70,7 @@ const SearchResults = () => {
             )}
             {isValidContent && isFetchingMaskVisible && (
                 <FetchingMask>
-                    Scroll too fast... The API is still fetching...{' '}
+                    Scroll too fast... The API is still fetching...
                 </FetchingMask>
             )}
         </SearchResultsWrapper>

@@ -42,7 +42,9 @@ const Header = () => {
             </div>
             {keyword !== '' && (
                 <TotalCount>
-                    {`${parseNumberwithCommas(totalCount)} repository results`}
+                    {totalCount > 1
+                        ? `${parseNumberwithCommas(totalCount)} repositories`
+                        : `${parseNumberwithCommas(totalCount)} repository`}
                 </TotalCount>
             )}
         </HeaderWrapper>
