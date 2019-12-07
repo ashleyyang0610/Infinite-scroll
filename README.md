@@ -64,7 +64,7 @@ pros: Reduce DOM elements. Only create elements the user can see.
 cons: Unable to search the item which isn't rendered. 
 
 #### 2. Make the scroll "really" infinite (The flow of infinite scroll is self-designed)
-<img src="https://github.com/ashleyyang0610/Infinite-scroll/blob/master/assets/infinite_scroll_flow.png" width="400">
+<img src="https://github.com/ashleyyang0610/Infinite-scroll/blob/master/assets/infinite_scroll_flow_v2.png" width="500">
 
 The threshold of the scroll offset equals to `per_page`.
 
