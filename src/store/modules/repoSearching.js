@@ -1,10 +1,9 @@
-import 'rxjs/add/operator/exhaustMap';
-import 'rxjs/add/operator/switchMap';
+import { createAction } from 'redux-actions';
+import { concat, from, of } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { catchError, switchMap, exhaustMap } from 'rxjs/operators';
 import _get from 'utils/httpService';
 import store from 'store/configureStore';
-import { catchError, switchMap } from 'rxjs/operators';
-import { concat, from, of } from 'rxjs';
-import { createAction } from 'redux-actions';
 import { DEFAULT_PAGE_SIZE, GET_REPO_LSIT } from 'config/repoSearching';
 
 /*
@@ -115,59 +114,65 @@ export const updateRepoList = createAction(UPDATE_REPO_LIST);
 export const updateTotalCount = createAction(UPDATE_TOTAL_COUNT);
 
 export const getRepoDataEpic = action$ =>
-    action$.ofType(GET_REPO_DATA).exhaustMap(action =>
-        concat(
-            of({ type: UPDATE_LOADING_FLAG, payload: true }),
-            from(
-                _get(GET_REPO_LSIT, {
-                    q: store.getState().repoSearching.keyword,
-                    page:
-                        action.payload.page ||
-                        store.getState().repoSearching.repoList.length /
-                            store.getState().repoSearching.pageSize +
-                            1,
-                    per_page:
-                        action.payload.per_page ||
-                        store.getState().repoSearching.pageSize
-                })
-            ).pipe(
-                switchMap(response =>
-                    concat(
-                        of({
-                            type: UPDATE_REPO_LIST,
-                            payload: store
-                                .getState()
-                                .repoSearching.repoList.concat(
-                                    response.data.items
-                                )
-                        }),
-                        of({
-                            type: UPDATE_TOTAL_COUNT,
-                            payload: response.data.total_count
-                        }),
-                        of({ type: UPDATE_FETCHING_MASK, payload: false }),
+    action$.pipe(
+        ofType(GET_REPO_DATA),
+        exhaustMap(action =>
+            concat(
+                of({ type: UPDATE_LOADING_FLAG, payload: true }),
+                from(
+                    _get(GET_REPO_LSIT, {
+                        q: store.getState().repoSearching.keyword,
+                        page:
+                            action.payload.page ||
+                            store.getState().repoSearching.repoList.length /
+                                store.getState().repoSearching.pageSize +
+                                1,
+                        per_page:
+                            action.payload.per_page ||
+                            store.getState().repoSearching.pageSize
+                    })
+                ).pipe(
+                    switchMap(response =>
+                        concat(
+                            of({
+                                type: UPDATE_REPO_LIST,
+                                payload: store
+                                    .getState()
+                                    .repoSearching.repoList.concat(
+                                        response.data.items
+                                    )
+                            }),
+                            of({
+                                type: UPDATE_TOTAL_COUNT,
+                                payload: response.data.total_count
+                            }),
+                            of({ type: UPDATE_FETCHING_MASK, payload: false }),
+                            of({ type: UPDATE_LOADING_FLAG, payload: false })
+                        )
+                    ),
+                    catchError(error =>
                         of({ type: UPDATE_LOADING_FLAG, payload: false })
                     )
-                ),
-                catchError(error =>
-                    of({ type: UPDATE_LOADING_FLAG, payload: false })
                 )
             )
         )
     );
 
 export const searchRepoDataEpic = action$ =>
-    action$.ofType(SEARCH_REPO_DATA).switchMap(action =>
-        concat(
-            of({ type: UPDATE_LOADING_FLAG, payload: true }),
-            of({ type: UPDATE_TOTAL_COUNT, payload: 0 }),
-            of({ type: UPDATE_KEYWORD, payload: action.payload.keyword }),
-            of({ type: UPDATE_REPO_LIST, payload: [] }),
-            of({
-                type: GET_REPO_DATA,
-                payload: {
-                    page: 1
-                }
-            })
+    action$.pipe(
+        ofType(SEARCH_REPO_DATA),
+        switchMap(action =>
+            concat(
+                of({ type: UPDATE_LOADING_FLAG, payload: true }),
+                of({ type: UPDATE_TOTAL_COUNT, payload: 0 }),
+                of({ type: UPDATE_KEYWORD, payload: action.payload.keyword }),
+                of({ type: UPDATE_REPO_LIST, payload: [] }),
+                of({
+                    type: GET_REPO_DATA,
+                    payload: {
+                        page: 1
+                    }
+                })
+            )
         )
     );
