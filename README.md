@@ -2,7 +2,14 @@
 
 An infinite list with Github search API.
 
+Demo site: https://ashleyyang0610.github.io/Infinite-scroll/
+
 ### Get Start
+
+#### Libs dependencies
+
+-   Node: v12.13.1
+-   Yarn: v1.19.2
 
 #### Clone Git repository
 
@@ -59,8 +66,10 @@ cons: Unable to search the item which isn't rendered.
 #### 2. Make the scroll "really" infinite (The flow of infinite scroll is self-designed)
 <img src="https://github.com/ashleyyang0610/Infinite-scroll/blob/master/assets/infinite_scroll_flow.png" width="400">
 
+The threshold of the scroll offset equals to `per_page`.
+
 #### 3. Handle momentum-based scrolling
-The `page_size` which used in API is calculated by browser view height. 
+The `per_page` which used in API is calculated by browser view height. 
 ```
 useEffect(() => {
     const wrapperHeight = document.querySelector('.infinite-list').offsetHeight;
@@ -75,6 +84,12 @@ useEffect(() => {
 `Math.ceil(wrapperHeight / ITEM_SIZE)`: The amount of visible items.
 
 API `page_size`is visible amount times 15.
+
+### Other highlights
+
+-   First use [react hooks](https://zh-hant.reactjs.org/docs/hooks-intro.html), [react-redux hooks](https://react-redux.js.org/next/api/hooks) in this project.
+-   First use [pipeable operators](https://github.com/ReactiveX/rxjs/blob/master/docs_app/content/guide/v6/pipeable-operators.md) in redux-observable (rxJS@^5.5)
+
 
 ### 3rd Party Libs
 
