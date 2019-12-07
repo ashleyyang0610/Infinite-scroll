@@ -110,6 +110,7 @@ API `page_size`is visible amount times 15.
 -   Error handling (notifications or toasts info)
 -   Better user experience/layout for mobile
 -   Better handling when user scroll too fast but the API hasn't responsed
+-   Add "end of list" wording at the end of the list.
 -   Handling list container resizing.
     -   Re-calculate page size when container height changed.
     -   Update list container height when window resize on mobile Chrome.
