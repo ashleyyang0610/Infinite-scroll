@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/Infinite-scroll/static/css/main.7d816d72.chunk.css",
-    "main.js": "/Infinite-scroll/static/js/main.da540866.chunk.js",
-    "main.js.map": "/Infinite-scroll/static/js/main.da540866.chunk.js.map",
+    "main.js": "/Infinite-scroll/static/js/main.c4398c0a.chunk.js",
+    "main.js.map": "/Infinite-scroll/static/js/main.c4398c0a.chunk.js.map",
     "runtime-main.js": "/Infinite-scroll/static/js/runtime-main.f85f543b.js",
     "runtime-main.js.map": "/Infinite-scroll/static/js/runtime-main.f85f543b.js.map",
-    "static/js/2.125dfa14.chunk.js": "/Infinite-scroll/static/js/2.125dfa14.chunk.js",
-    "static/js/2.125dfa14.chunk.js.map": "/Infinite-scroll/static/js/2.125dfa14.chunk.js.map",
+    "static/js/2.9e07f100.chunk.js": "/Infinite-scroll/static/js/2.9e07f100.chunk.js",
+    "static/js/2.9e07f100.chunk.js.map": "/Infinite-scroll/static/js/2.9e07f100.chunk.js.map",
     "index.html": "/Infinite-scroll/index.html",
-    "precache-manifest.491ba9d754646a2968e1ef6fe276e8c1.js": "/Infinite-scroll/precache-manifest.491ba9d754646a2968e1ef6fe276e8c1.js",
+    "precache-manifest.ad5d29764dce0730e01c24ea0ee1bc2d.js": "/Infinite-scroll/precache-manifest.ad5d29764dce0730e01c24ea0ee1bc2d.js",
     "service-worker.js": "/Infinite-scroll/service-worker.js",
     "static/css/main.7d816d72.chunk.css.map": "/Infinite-scroll/static/css/main.7d816d72.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.f85f543b.js",
-    "static/js/2.125dfa14.chunk.js",
+    "static/js/2.9e07f100.chunk.js",
     "static/css/main.7d816d72.chunk.css",
-    "static/js/main.da540866.chunk.js"
+    "static/js/main.c4398c0a.chunk.js"
   ]
 }
