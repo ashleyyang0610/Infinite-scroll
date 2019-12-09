@@ -36,9 +36,7 @@ const SearchResults = () => {
 
     return (
         <SearchResultsWrapper className={searchResultsWrapperClass}>
-            {isLoading && !isValidContent && (
-                <Loader className="position-middle-content" />
-            )}
+            {isLoading && !isValidContent && <Loader />}
             {!isLoading && keyword !== '' && !isValidContent && (
                 <div className="position-middle-content">No repo found</div>
             )}

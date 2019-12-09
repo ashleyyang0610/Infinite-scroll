@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledLoader = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
     margin-top: -22px;
+    margin-left: -22px;
     font-size: 10px;
-    position: relative;
     text-indent: -9999em;
     border-top: 2px solid rgba(255, 255, 255, 0.2);
     border-right: 2px solid rgba(255, 255, 255, 0.2);
