@@ -19,5 +19,5 @@ main {
     display: flex !important; /** Used for prevent gh-pages automatically in build process **/
     flex-direction: column;
     height: 100vh;
-    height: stretch;
+    max-height: stretch;
 }
